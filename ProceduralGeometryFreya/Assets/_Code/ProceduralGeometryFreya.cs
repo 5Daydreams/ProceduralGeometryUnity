@@ -20,12 +20,14 @@ public class ProceduralGeometryFreya : MonoBehaviour
         };
 
         int[] triIndices = new int[]{
-            2,0,1,
-            2,1,3
+            1,0,2,
+            3,1,2
         };
 
         mesh.SetVertices(points);
         mesh.triangles = triIndices;
+
+        mesh.RecalculateNormals();
 
         _meshFilter.sharedMesh = mesh;
     }
