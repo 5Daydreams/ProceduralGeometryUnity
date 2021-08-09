@@ -44,6 +44,9 @@
         <option value="$PROJECT_DIR$/Assets/Submodules/unity-spellbook/Editor/NotebookWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/Submodules/unity-spellbook/Editor/NewNotebookWindow.cs" />
         <option value="$PROJECT_DIR$/Assets/_Code/ProceduralGeometryFreya.cs" />
+        <option value="$PROJECT_DIR$/Assets/Submodules/unity-spellbook/_Code/Extensions/VectorExtension.cs" />
+        <option value="$PROJECT_DIR$/Assets/Submodules/unity-spellbook/_Code/Extensions/GizmoExtensions.cs" />
+        <option value="$PROJECT_DIR$/Assets/_Code/QuadRing.cs" />
       </list>
     </option>
   </component>
@@ -86,7 +89,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1628524883432</updated>
-      <workItem from="1628524899034" duration="2546000" />
+      <workItem from="1628524899034" duration="7142000" />
     </task>
     <servers />
   </component>
