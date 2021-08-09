@@ -43,9 +43,9 @@ public class ProceduralGeometryFreya : MonoBehaviour
         };
 
         mesh.SetVertices(points);
-        mesh.triangles = triIndices;
         mesh.SetNormals(normals);
         mesh.SetUVs(0, uvs);
+        mesh.triangles = triIndices;
 
         _meshFilter.sharedMesh = mesh;
     }
