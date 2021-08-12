@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Submodules._Code.Extensions;
 using UnityEngine;
 
@@ -93,7 +92,7 @@ namespace _Code
                 int indexInnerRoot = indexRoot + 1;
                 int indexOuterNext = indexRoot + 2;
                 int indexInnerNext = indexRoot + 3;
-
+    
                 triangleIndices.Add(indexRoot);
                 triangleIndices.Add(indexInnerNext);
                 triangleIndices.Add(indexOuterNext);
