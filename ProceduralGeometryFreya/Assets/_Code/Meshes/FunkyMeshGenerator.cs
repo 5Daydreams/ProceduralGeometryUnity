@@ -25,7 +25,10 @@ public class FunkyMeshGenerator : MonoBehaviour
             _meshFilter = GetComponent<MeshFilter>();
     }
 
-    private void Update() => GenerateMesh();
+    private void Update()
+    {
+        GenerateMesh();
+    }
 
 
     private void GenerateMesh()
@@ -33,6 +36,7 @@ public class FunkyMeshGenerator : MonoBehaviour
         _mesh.Clear();
 
         List<Vector3> vertices = new List<Vector3>();
+        List<Vector3> normals = new List<Vector3>();
         List<int> triangles = new List<int>();
 
         float segmentSize = 1 / (float) _numberOfSegments;
@@ -49,11 +53,14 @@ public class FunkyMeshGenerator : MonoBehaviour
                 Vector3 a = GetPositionOnRegularCurve(tValueA).pos;
                 a = stripeRotation * a;
 
-                Quaternion rotation = Quaternion.AngleAxis(_stripeAngularWidth + i*_curlAngle/_numberOfSegments, Vector3.up);
+                Quaternion rotation = Quaternion.AngleAxis(_stripeAngularWidth, Vector3.up);
                 Vector3 b = rotation * a; 
 
                 vertices.Add(a);
+                normals.Add(a.normalized);
+                
                 vertices.Add(b);
+                normals.Add(b.normalized);
             }
         }
 
@@ -76,6 +83,7 @@ public class FunkyMeshGenerator : MonoBehaviour
 
         _mesh.SetVertices(vertices);
         _mesh.SetTriangles(triangles, 0);
+        _mesh.SetVertices(normals);
 
         _meshFilter.sharedMesh = _mesh;
         return;
