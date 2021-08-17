@@ -50,12 +50,12 @@ public class MeshStripGenerator : MonoBehaviour
             int rootIndex = 2 * i;
             
             triangles.Add(rootIndex);
-            triangles.Add(rootIndex+1);
             triangles.Add(rootIndex+2);
+            triangles.Add(rootIndex+1);
             
             triangles.Add(rootIndex+1);
-            triangles.Add(rootIndex+3);
             triangles.Add(rootIndex+2);
+            triangles.Add(rootIndex+3);
         }
         
         _mesh.SetVertices(vertices);
@@ -68,8 +68,8 @@ public class MeshStripGenerator : MonoBehaviour
     private OrientedPoint GetPositionOnRegularCurve(float t)
     {
         Vector3 pos = new Vector3(
-            Mathf.Sin(Mathf.PI*t),
-            Mathf.Cos(Mathf.PI*t),
+            Mathf.Sin(2*Mathf.PI*t),
+            Mathf.Cos(2*Mathf.PI*t),
             0.0f
         );
 

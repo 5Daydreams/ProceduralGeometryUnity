@@ -6,20 +6,20 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter))]
-public class FunkyMeshGenerator : MonoBehaviour
+public class SphereAngledSlicesMeshGenerator : MonoBehaviour
 {
     [SerializeField] private MeshFilter _meshFilter;
     [Range(2, 64)] [SerializeField] private int _numberOfSegments = 3;
     [Range(1, 64)] [SerializeField] private int _numberOfStripes = 1;
     [Range(0, 360)] [SerializeField] private float _stripeAngularWidth = 90;
-    [Range(0, 360)] [SerializeField] private float _curlAngle = 90;
+    [Range(0, 1080)] [SerializeField] private float _curlAngle = 90;
 
     private Mesh _mesh;
 
     private void Awake()
     {
         _mesh = new Mesh();
-        _mesh.name = "FunkyMesh";
+        _mesh.name = "SphereSliceMesh";
 
         if (!_meshFilter)
             _meshFilter = GetComponent<MeshFilter>();
@@ -48,19 +48,19 @@ public class FunkyMeshGenerator : MonoBehaviour
             {
                 float baseAngle = 360.0f / _numberOfStripes;
 
-                Quaternion stripeRotation = Quaternion.AngleAxis(baseAngle * j+ i*_curlAngle/_numberOfSegments, Vector3.up);
+                Quaternion stripeRotation = Quaternion.AngleAxis(baseAngle * j+ tValueA*_curlAngle, Vector3.up);
 
                 Vector3 a = GetPositionOnRegularCurve(tValueA).pos;
                 a = stripeRotation * a;
 
                 Quaternion rotation = Quaternion.AngleAxis(_stripeAngularWidth, Vector3.up);
-                Vector3 b = rotation * a; 
+                Vector3 b = rotation * a;
 
                 vertices.Add(a);
-                normals.Add(a.normalized);
+                normals.Add(a);
                 
                 vertices.Add(b);
-                normals.Add(b.normalized);
+                normals.Add(b);
             }
         }
 
@@ -83,48 +83,12 @@ public class FunkyMeshGenerator : MonoBehaviour
 
         _mesh.SetVertices(vertices);
         _mesh.SetTriangles(triangles, 0);
-        _mesh.SetVertices(normals);
+        _mesh.SetNormals(normals);
 
         _meshFilter.sharedMesh = _mesh;
         return;
     }
-
-    // private void OnDrawGizmos() => GenerateGizmo();
-
-    private void GenerateGizmo()
-    {
-        float segment = 1 / (_numberOfSegments - 1.0f);
-        for (int i = 0; i < _numberOfSegments - 1; i++)
-        {
-            float tValueA = segment * i;
-            float tValueB = segment * (i + 1);
-            Vector3 a = GetPositionOnFunkyCurve(tValueA).pos * transform.lossyScale.x + transform.position;
-            Vector3 b = GetPositionOnFunkyCurve(tValueB).pos * transform.lossyScale.x + transform.position;
-
-            Gizmos.DrawLine(a, b);
-
-            Vector3 c = GetPositionOnRegularCurve(tValueA).pos * transform.lossyScale.x + transform.position;
-            Vector3 d = GetPositionOnRegularCurve(tValueB).pos * transform.lossyScale.x + transform.position;
-
-            Gizmos.DrawLine(c, d);
-        }
-    }
-
-    private OrientedPoint GetPositionOnFunkyCurve(float t)
-    {
-        Vector3 pos = new Vector3(
-            Mathf.Sin(Mathf.PI * t),
-            Mathf.Cos(Mathf.PI * t),
-            0.5f * Mathf.Sin(2 * Mathf.PI * t)
-        );
-
-        Quaternion rot = Quaternion.LookRotation(pos);
-
-        OrientedPoint op = new OrientedPoint(pos, rot);
-
-        return op;
-    }
-
+    
     private OrientedPoint GetPositionOnRegularCurve(float t)
     {
         Vector3 pos = new Vector3(
