@@ -2,7 +2,7 @@
 using Submodules._Code.Extensions;
 using UnityEngine;
 
-namespace _Code
+namespace _Code.Meshes
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(MeshFilter))]

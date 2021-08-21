@@ -1,35 +1,37 @@
 ﻿using System;
 using UnityEngine;
 
-
-[CreateAssetMenu()]
-public class Mesh2D : ScriptableObject
+namespace _Code
 {
-    [Serializable] 
-    public class Vertex
+    [CreateAssetMenu()]
+    public class Mesh2D : ScriptableObject
     {
-        public Vector2 point;
-        public Vector2 normal;
-        public float u;
-    }
-
-    public Vertex[] vertices;
-    public int[] lineIndices;
-
-    public int VertexCount => vertices.Length;
-    public int LineCount => lineIndices.Length;
-
-    public float CalculateUSpan()
-    {
-        float dist = 0;
-        for (int i = 0; i < LineCount; i+=2)
+        [Serializable] 
+        public class Vertex
         {
-            Vector2 a = vertices[lineIndices[i]].point;
-            Vector2 b = vertices[lineIndices[i+1]].point;
-
-            dist += Vector2.Distance(b,a);
+            public Vector2 point;
+            public Vector2 normal;
+            public float u;
         }
 
-        return dist;
+        public Vertex[] vertices;
+        public int[] lineIndices;
+
+        public int VertexCount => vertices.Length;
+        public int LineCount => lineIndices.Length;
+
+        public float CalculateUSpan()
+        {
+            float dist = 0;
+            for (int i = 0; i < LineCount; i+=2)
+            {
+                Vector2 a = vertices[lineIndices[i]].point;
+                Vector2 b = vertices[lineIndices[i+1]].point;
+
+                dist += Vector2.Distance(b,a);
+            }
+
+            return dist;
+        }
     }
 }
