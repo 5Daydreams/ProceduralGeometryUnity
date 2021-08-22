@@ -52,9 +52,9 @@ namespace _Code.Meshes
                 for (int j = 0; j < _ringVertexCount; j++)
                 {
                     Vector3 innerDisplacement1 = SpinAroundAxis(360.0f * j * innerRingSegmentCount,
-                        Vector3.right * _torusThickness, Vector3.forward);
+                        Vector3.left * _torusThickness, Vector3.forward);
                     Vector3 innerDisplacement2 = SpinAroundAxis(360.0f * (j + 1) * innerRingSegmentCount,
-                        Vector3.right * _torusThickness, Vector3.forward);
+                        Vector3.left * _torusThickness, Vector3.forward);
 
                     innerDisplacement1 = iterationRot * innerDisplacement1;
                     innerDisplacement2 = iterationRot * innerDisplacement2;
