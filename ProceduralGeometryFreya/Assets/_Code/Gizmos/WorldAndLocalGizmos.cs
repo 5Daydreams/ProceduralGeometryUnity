@@ -43,16 +43,11 @@ public class WorldAndLocalGizmos : MonoBehaviour
 
     private void LocalToWorld()
     {
-        Quaternion initRefRotation = _initialRef.rotation;
         Vector3 relativePos = _pointPos - _initialRefPos;
 
-        Vector3 rightVec = initRefRotation * Vector3.right;
-        Vector3 upVec = initRefRotation * Vector3.up;
-        Vector3 frontVec = initRefRotation * Vector3.forward;
-
-        float zPos = Vector3.Dot(frontVec, relativePos);
-        float yPos = Vector3.Dot(upVec, relativePos);
-        float xPos = Vector3.Dot(rightVec, relativePos);
+        float zPos = Vector3.Dot(_initialRef.forward, relativePos);
+        float yPos = Vector3.Dot(_initialRef.up, relativePos);
+        float xPos = Vector3.Dot(_initialRef.right, relativePos);
 
         Vector3 resultingVector = new Vector3(xPos, yPos, zPos);
 
@@ -65,16 +60,11 @@ public class WorldAndLocalGizmos : MonoBehaviour
 
     private void WorldToLocal()
     {
-        Quaternion newRefRotation = _newRef.rotation;
         Vector3 relativePos = _pointPos - _newRefPos;
 
-        Vector3 rightVec = newRefRotation * Vector3.right;
-        Vector3 upVec = newRefRotation * Vector3.up;
-        Vector3 frontVec = newRefRotation * Vector3.forward;
-
-        float zPos = Vector3.Dot(frontVec, relativePos);
-        float yPos = Vector3.Dot(upVec, relativePos);
-        float xPos = Vector3.Dot(rightVec, relativePos);
+        float zPos = Vector3.Dot(_newRef.forward, relativePos);
+        float yPos = Vector3.Dot(_newRef.up, relativePos);
+        float xPos = Vector3.Dot(_newRef.right, relativePos);
 
         Vector3 resultingVector = new Vector3(xPos, yPos, zPos);
 
