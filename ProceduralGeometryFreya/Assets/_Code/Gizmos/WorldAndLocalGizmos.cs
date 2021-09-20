@@ -74,19 +74,7 @@ public class WorldAndLocalGizmos : MonoBehaviour
         Gizmos.DrawLine(_initialRefPos, _testPointW2L.position);
         Gizmos.DrawLine(_newRefPos, _pointPos);
     }
-
-    private void DrawFromWorldToPoint()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(_initialRefPos, _pointPos);
-    }
-
-    private void DrawFromLocalToPoint()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(_newRefPos, _pointPos);
-    }
-
+    
     private void DrawNewReferenceFrames()
     {
         Quaternion newRefRotation = _newRef.rotation;
