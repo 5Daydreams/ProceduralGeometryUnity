@@ -14,7 +14,7 @@ public class BouncingLaserbeam : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        
+
         if (_targetDirTransform == null || _line == null)
         {
             return;
@@ -44,11 +44,12 @@ public class BouncingLaserbeam : MonoBehaviour
             {
                 Vector3 hitPosition = raycastInfo.point;
                 float distanceTravelled = Vector3.Distance(lastPos, hitPosition);
-                // Gizmos.DrawLine(lastPos, lastPos + direction * distanceTravelled);
                 _points.Add(lastPos + direction * distanceTravelled);
              
-                float bounceFactor = Vector3.Dot(direction, raycastInfo.normal.normalized);
-                direction = direction - 2 * (bounceFactor) * raycastInfo.normal.normalized;
+                raycastInfo.normal.Normalize();
+                float bounceFactor = Vector3.Dot(direction, raycastInfo.normal);
+                direction = direction - 2 * (bounceFactor) * raycastInfo.normal;
+                
                 direction.Normalize();
                 lastPos = hitPosition;
                 _remainingLaserTravel -= distanceTravelled;
@@ -58,7 +59,6 @@ public class BouncingLaserbeam : MonoBehaviour
             break;
         }
 
-        // Gizmos.DrawLine(lastPos, lastPos + direction * _remainingLaserTravel);
         _points.Add(lastPos + direction * _remainingLaserTravel);
         
         _line.positionCount = _points.Count;
