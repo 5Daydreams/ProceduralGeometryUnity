@@ -57,7 +57,7 @@ public class PredictionLine : MonoBehaviour
             Gizmos.color = _trajColor;
             Gizmos.DrawLine(pos, nextPos);
 
-            Vector3 axisOffsetDir = Vector3.Cross(nextPos - pos, Vector3.up).normalized;
+            Vector3 axisOffsetDir = Vector3.Cross(nextPos - pos, Vector3.up).normalized * _coilRadius;
 
             Quaternion rotationQuaternion1 = Quaternion.AngleAxis(angleStepSize * i, iterationAxis);
             Quaternion rotationQuaternion2 = Quaternion.AngleAxis(angleStepSize * (i + 0.5f), iterationAxis);
