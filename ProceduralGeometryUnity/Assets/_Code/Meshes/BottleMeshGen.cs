@@ -59,7 +59,7 @@ namespace _Code.Meshes
 
                 verts.Add(startingPoint);
                 normals.Add(Vector3.down);
-                uvCoords.Add(new Vector2(0.0f,0.0f));
+                uvCoords.Add(new Vector2(0.5f,0.0f));
 
                 float radius = curve.Evaluate(0);
                 Vector3 radialVec = Vector3.right * radius + Vector3.up * (-_height * 0.5f);
@@ -69,7 +69,7 @@ namespace _Code.Meshes
 
                 baseNormal = Quaternion.AngleAxis(-90.0f, Vector3.forward) * baseNormal;
                 
-                for (int j = 0; j < _angleDivisions; j++)
+                for (int j = 0; j < _angleDivisions+1; j++)
                 {
                     Quaternion rotation = Quaternion.AngleAxis(iterationAngleStepSize * j, Vector3.down);
 
@@ -93,7 +93,7 @@ namespace _Code.Meshes
                 float tangent = curve.GetDerivative(evalPosition);
                 Vector3 baseNormal = (Vector3.right + Vector3.down * tangent).normalized;
 
-                for (int j = 0; j < _angleDivisions; j++)
+                for (int j = 0; j < _angleDivisions+1; j++)
                 {
                     Quaternion rotation = Quaternion.AngleAxis(iterationAngleStepSize * j, Vector3.down);
 
@@ -121,10 +121,10 @@ namespace _Code.Meshes
 
             if (_filledBottom)
             {
-                for (int j = 0; j < _angleDivisions; j++)
+                for (int j = 0; j < _angleDivisions+1; j++)
                 {
                     int index = (j + 1);
-                    int thing = (j + 1) % _angleDivisions + 1;
+                    int thing = (j + 1) + 1;
 
                     tris.Add(0);
                     tris.Add(index);
@@ -135,13 +135,13 @@ namespace _Code.Meshes
 
             for (int i = 0; i < _heightDivisions; i++)
             {
-                for (int j = 0; j < _angleDivisions; j++)
+                for (int j = 0; j < _angleDivisions + 1; j++)
                 {
                     int index = i * _angleDivisions + j + indexStart;
                     int angletrick;
                     int angletrick2;
 
-                    if ((j + 1) % _angleDivisions == 0)
+                    if ((j + 1) == 0)
                     {
                         angletrick = 0;
                         angletrick2 = -_angleDivisions;
@@ -165,12 +165,12 @@ namespace _Code.Meshes
 
             if (_filledTop)
             {
-                int lastIndex = (_heightDivisions + 1) * _angleDivisions + indexStart;
+                int lastIndex = (_heightDivisions + 1) * (_angleDivisions) + indexStart;
 
-                for (int j = 0; j < _angleDivisions; j++)
+                for (int j = 0; j < _angleDivisions+1; j++)
                 {
                     int index1 = _heightDivisions * _angleDivisions + indexStart + j;
-                    int index2 = _heightDivisions * _angleDivisions + indexStart + (j + 1) % _angleDivisions;
+                    int index2 = _heightDivisions * _angleDivisions + indexStart + (j + 1);
 
                     tris.Add(lastIndex);
                     tris.Add(index2);
