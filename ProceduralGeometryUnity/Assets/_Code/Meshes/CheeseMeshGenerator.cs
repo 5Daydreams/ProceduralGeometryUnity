@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using submodules.unity_spellbook._Code.Extensions;
+using submodules.unity_spellbook._Code.ExtensionMethods;
 using UnityEngine;
 
 namespace _Code.Meshes
