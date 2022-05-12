@@ -46,7 +46,7 @@
             {
                 fixed4 col = tex2D(_MainTex,i.uv) * 0.5f + 0.2f;
 
-                fixed4 thing = float4(i.uv,0,1);
+                // fixed4 thing = float4(i.uv,0,1);
                 
                 return col;
             }

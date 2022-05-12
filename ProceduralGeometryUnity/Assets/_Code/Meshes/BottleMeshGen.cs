@@ -112,7 +112,7 @@ namespace _Code.Meshes
                 Vector3 topVector = Vector3.up * (+_height * 0.5f);
                 verts.Add(topVector);
                 normals.Add(Vector3.up);
-                uvCoords.Add(Vector2.up);
+                uvCoords.Add(new Vector2(0.5f,1.0001f));
             }
 
             // Vertices Filled --------------------------------------------------
@@ -137,40 +137,27 @@ namespace _Code.Meshes
             {
                 for (int j = 0; j < _angleDivisions + 1; j++)
                 {
-                    int index = i * _angleDivisions + j + indexStart;
-                    int angletrick;
-                    int angletrick2;
-
-                    if ((j + 1) == 0)
-                    {
-                        angletrick = 0;
-                        angletrick2 = -_angleDivisions;
-                    }
-                    else
-                    {
-                        angletrick = _angleDivisions;
-                        angletrick2 = 0;
-                    }
+                    int index = i * (_angleDivisions + 1) + j + indexStart;
 
                     tris.Add(index);
                     tris.Add(index + _angleDivisions);
-                    tris.Add(index + angletrick + 1);
+                    tris.Add(index + _angleDivisions + 1);
 
                     tris.Add(index);
-                    tris.Add(index + angletrick + 1);
-                    tris.Add(index + angletrick2 + 1);
+                    tris.Add(index + _angleDivisions + 1);
+                    tris.Add(index +  1);
                 }
             }
 
 
             if (_filledTop)
             {
-                int lastIndex = (_heightDivisions + 1) * (_angleDivisions) + indexStart;
+                int lastIndex = (_heightDivisions + 1) * (_angleDivisions + 1) + indexStart;
 
-                for (int j = 0; j < _angleDivisions+1; j++)
+                for (int j = 0; j < _angleDivisions + 1; j++)
                 {
-                    int index1 = _heightDivisions * _angleDivisions + indexStart + j;
-                    int index2 = _heightDivisions * _angleDivisions + indexStart + (j + 1);
+                    int index1 = (_heightDivisions) * (_angleDivisions + 1) + indexStart + j;
+                    int index2 = (_heightDivisions) * (_angleDivisions + 1) + indexStart + (j + 1);
 
                     tris.Add(lastIndex);
                     tris.Add(index2);
