@@ -1,0 +1,3 @@
+[submodule "ProceduralGeometryUnity/Assets/submodules/unity-spellbook"]
+	path = ProceduralGeometryUnity/Assets/submodules/unity-spellbook
+	url = https://github.com/5Daydreams/unity-spellbook.git
