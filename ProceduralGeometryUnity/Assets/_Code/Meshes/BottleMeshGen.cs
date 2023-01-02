@@ -11,8 +11,8 @@ namespace _Code.Meshes
         [Range(1.0f, 10.0f)] [SerializeField] private float _height = 1.0f;
         [Range(1.0f, 10.0f)] [SerializeField] private float _radiusScaling = 1.0f;
         [Range(1, 32)] [SerializeField] private int _heightDivisions = 5;
-        [Range(3, 32)] [SerializeField] private int _angleDivisions = 5;
-        [Range(0, 6)] [SerializeField] private int _edgeDivisions;
+        [Range(3, 64)] [SerializeField] private int _angleDivisions = 5;
+        // [Range(0, 6)] [SerializeField] private int _edgeDivisions;
         [SerializeField] private bool _filledBottom = false;
         [SerializeField] private bool _filledTop = false;
         private MeshFilter _meshFilter;
